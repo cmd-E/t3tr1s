@@ -1,11 +1,11 @@
 let main = document.querySelector('.main')
-let mainCells = []
+let mainCells = [] // cells of playfield
 let mainCellArr = [] // List of lists. Inner list contains rows of playfield cells (10 in each)
 const scoreElem = document.getElementById('score')
 const levelElem = document.getElementById('level')
 const nextTetroElem = document.getElementById('next-tetro')
-let ntCells = []
-let ntCellsArr = []
+let ntCells = [] // cells of next tetromino area
+let ntCellsArr = [] // List of lists. Inner list contains rows of next tetromino cells (4 in each)
 const startBtn = document.getElementById('start')
 const pauseBtn = document.getElementById('pause')
 const gameOver = document.getElementById('game-over')
@@ -111,20 +111,12 @@ function drawNewPlayfield() {
 	for (let y = 0; y < playField.length; y++) {
 		for (let x = 0; x < playField[y].length; x++) {
 			mainInnerHTML += '<div class="cell" style="opacity:0;"></div>'
-			// if (playField[y][x] === 1) {
-			// 	mainInnerHTML += '<div class="cell" style="opacity:0;"></div>'
-			// } else if (playField[y][x] === 2) {
-			// 	mainInnerHTML += '<div class="cell" style="opacity:0;></div>'
-			// } else {
-			// 	mainInnerHTML += '<div class="cell" style="opacity:0;></div>'
-			// }
 		}
 	}
 	main.innerHTML = mainInnerHTML
 	mainCells = Array.from(main.querySelectorAll('.cell'))
 	while (mainCells.length) mainCellArr.push(mainCells.splice(0, 10))
 	drawCleanNtGrid()
-	// console.log(mainCellArr)
 }
 
 function drawCleanNtGrid() {
@@ -141,27 +133,20 @@ function drawCleanNtGrid() {
 }
 
 function draw() {
-	// let mainInnerHTML = ''
 	for (let y = 0; y < playField.length; y++) {
 		for (let x = 0; x < playField[y].length; x++) {
 			if (playField[y][x] === 1) {
 				mainCellArr[y][x].style.opacity = '1'
-				// mainInnerHTML += '<div class="cell movingCell"></div>'
 			} else if (playField[y][x] === 2) {
-				// mainInnerHTML += '<div class="cell fixedCell"></div>'
 				mainCellArr[y][x].style.opacity = '1'
 			} else {
-				// mainInnerHTML += '<div class="cell"></div>'
 				mainCellArr[y][x].style.opacity = '0'
 			}
 		}
 	}
-	// main.innerHTML = mainInnerHTML
 }
 
 function drawNextTetro() {
-	// let nextTetroInnerHTML = ''
-	// debugger
 	ntCellsArr.forEach((row) => {
 		row.forEach((cell) => {
 			cell.style.opacity = 0
@@ -170,16 +155,12 @@ function drawNextTetro() {
 	for (let y = 0; y < nextTetro.shape.length; y++) {
 		for (let x = 0; x < nextTetro.shape[y].length; x++) {
 			if (nextTetro.shape[y][x] === 1) {
-				// nextTetroInnerHTML += '<div class="cell movingCell"></div>'
 				ntCellsArr[y][x].style.opacity = 1
 			} else {
-				// nextTetroInnerHTML += '<div class="cell"></div>'
 				ntCellsArr[y][x].style.opacity = 0
 			}
 		}
-		// nextTetroInnerHTML += '<br/>'
 	}
-	// nextTetroElem.innerHTML = nextTetroInnerHTML
 }
 
 function removePrevActiveTetro() {
@@ -381,7 +362,6 @@ pauseBtn.addEventListener('click', (e) => {
 })
 
 startBtn.addEventListener('click', (e) => {
-	// debugger
 	if (!gameTimerID) {
 		isPaused = false
 		e.target.innerHTML = 'Перезапустить'
