@@ -1,4 +1,6 @@
 let main = document.querySelector('.main')
+let mainCells = []
+let mainCellArr = []
 const scoreElem = document.getElementById('score')
 const levelElem = document.getElementById('level')
 const nextTetroElem = document.getElementById('next-tetro')
@@ -101,8 +103,8 @@ let figures = {
 
 let activeTetro = getNewTetro()
 let nextTetro = getNewTetro()
-//TODO: triggers repaint as hell
-function draw() {
+
+function drawNewPlayfield() {
 	let mainInnerHTML = ''
 	for (let y = 0; y < playField.length; y++) {
 		for (let x = 0; x < playField[y].length; x++) {
@@ -116,6 +118,28 @@ function draw() {
 		}
 	}
 	main.innerHTML = mainInnerHTML
+	mainCells = Array.from(main.querySelectorAll('.cell'))
+	while (mainCells.length) mainCellArr.push(mainCells.splice(0, 10))
+	// console.log(mainCellArr)
+}
+
+function draw() {
+	// let mainInnerHTML = ''
+	for (let y = 0; y < playField.length; y++) {
+		for (let x = 0; x < playField[y].length; x++) {
+			if (playField[y][x] === 1) {
+				mainCellArr[y][x].style.opacity = '0'
+				// mainInnerHTML += '<div class="cell movingCell"></div>'
+			} else if (playField[y][x] === 2) {
+				// mainInnerHTML += '<div class="cell fixedCell"></div>'
+				mainCellArr[y][x].style.opacity = '0'
+			} else {
+				// mainInnerHTML += '<div class="cell"></div>'
+				mainCellArr[y][x].style.opacity = '1'
+			}
+		}
+	}
+	// main.innerHTML = mainInnerHTML
 }
 
 function drawNextTetro() {
@@ -346,7 +370,8 @@ startBtn.addEventListener('click', (e) => {
 scoreElem.innerHTML = score
 levelElem.innerHTML = currentLevel
 
-draw()
+// draw()
+drawNewPlayfield()
 
 function startGame() {
 	moveTetroDown()
