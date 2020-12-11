@@ -188,6 +188,7 @@ function rotateTetro() {
 	const prevTetroState = activeTetro.shape
 	activeTetro.shape = activeTetro.shape[0].map((val, index) => activeTetro.shape.map((row) => row[index]).reverse())
 	if (hasCollisions()) {
+		activeTetro.shape = prevTetroState
 	}
 }
 
