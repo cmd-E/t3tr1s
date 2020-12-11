@@ -1,0 +1,59 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: black;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#game {
+	padding-top: 20px;
+	font-size: 40px;
+	width: 320px;
+	margin: auto;
+}
+
+.main {
+	/*+20 пикселей для рамки*/
+	width: 320px;
+	height: 620px;
+	margin: 20px auto 0;
+	border: 10px solid silver;
+	font-size: 0; /*Без него между ячеками образуется пространство*/
+}
+
+.cell {
+	width: 30px;
+	height: 30px;
+	border: 1px solid silver;
+	display: inline-block;
+}
+
+.movingCell {
+	background-color: blue;
+}
+
+.fixedCell {
+	background-color: green;
+}
+
+#next-tetro {
+	font-size: 0;
+	position: absolute;
+	top: 200px;
+	left: 200px;
+}
+
+#game-over {
+	font-size: 100px;
+	text-align: center;
+	color: green;
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
