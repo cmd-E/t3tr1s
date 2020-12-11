@@ -1,9 +1,11 @@
 let main = document.querySelector('.main')
 let mainCells = []
-let mainCellArr = []
+let mainCellArr = [] // List of lists. Inner list contains rows of playfield cells (10 in each)
 const scoreElem = document.getElementById('score')
 const levelElem = document.getElementById('level')
 const nextTetroElem = document.getElementById('next-tetro')
+let ntCells = []
+let ntCellsArr = []
 const startBtn = document.getElementById('start')
 const pauseBtn = document.getElementById('pause')
 const gameOver = document.getElementById('game-over')
@@ -121,7 +123,21 @@ function drawNewPlayfield() {
 	main.innerHTML = mainInnerHTML
 	mainCells = Array.from(main.querySelectorAll('.cell'))
 	while (mainCells.length) mainCellArr.push(mainCells.splice(0, 10))
+	drawCleanNtGrid()
 	// console.log(mainCellArr)
+}
+
+function drawCleanNtGrid() {
+	let nextTetroInnerHTML = ''
+	for (let y = 0; y < 4; y++) {
+		for (let x = 0; x < 4; x++) {
+			nextTetroInnerHTML += '<div class="cell" style="opacity:0;"></div>'
+		}
+		nextTetroInnerHTML += '<br/>'
+	}
+	nextTetroElem.innerHTML = nextTetroInnerHTML
+	ntCells = Array.from(nextTetroElem.querySelectorAll('.cell'))
+	while (ntCells.length) ntCellsArr.push(ntCells.splice(0, 4))
 }
 
 function draw() {
@@ -144,18 +160,26 @@ function draw() {
 }
 
 function drawNextTetro() {
-	let nextTetroInnerHTML = ''
+	// let nextTetroInnerHTML = ''
+	// debugger
+	ntCellsArr.forEach((row) => {
+		row.forEach((cell) => {
+			cell.style.opacity = 0
+		})
+	})
 	for (let y = 0; y < nextTetro.shape.length; y++) {
 		for (let x = 0; x < nextTetro.shape[y].length; x++) {
 			if (nextTetro.shape[y][x] === 1) {
-				nextTetroInnerHTML += '<div class="cell movingCell"></div>'
+				// nextTetroInnerHTML += '<div class="cell movingCell"></div>'
+				ntCellsArr[y][x].style.opacity = 1
 			} else {
-				nextTetroInnerHTML += '<div class="cell"></div>'
+				// nextTetroInnerHTML += '<div class="cell"></div>'
+				ntCellsArr[y][x].style.opacity = 0
 			}
 		}
-		nextTetroInnerHTML += '<br/>'
+		// nextTetroInnerHTML += '<br/>'
 	}
-	nextTetroElem.innerHTML = nextTetroInnerHTML
+	// nextTetroElem.innerHTML = nextTetroInnerHTML
 }
 
 function removePrevActiveTetro() {
@@ -357,7 +381,7 @@ pauseBtn.addEventListener('click', (e) => {
 })
 
 startBtn.addEventListener('click', (e) => {
-	debugger
+	// debugger
 	if (!gameTimerID) {
 		isPaused = false
 		e.target.innerHTML = 'Перезапустить'
