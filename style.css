@@ -23,7 +23,7 @@ body {
 	margin: 20px auto 0;
 	border: 10px solid silver;
 	font-size: 0; /*Без него между ячеками образуется пространство*/
-	background-color: red;
+	background-color: blue;
 }
 
 .cell {
@@ -32,6 +32,7 @@ body {
 	border: 1px solid silver;
 	display: inline-block;
 	background-color: black;
+	will-change: opacity;
 }
 
 .movingCell {
