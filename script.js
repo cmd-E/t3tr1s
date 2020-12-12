@@ -106,6 +106,9 @@ let figures = {
 let activeTetro = getNewTetro()
 let nextTetro = getNewTetro()
 
+/**
+ * Draws playfield at page loading
+ */
 function drawNewPlayfield() {
 	let mainInnerHTML = ''
 	for (let y = 0; y < playField.length; y++) {
@@ -119,6 +122,9 @@ function drawNewPlayfield() {
 	drawCleanNtGrid()
 }
 
+/**
+ * Draws next tetromino grid at page loading
+ */
 function drawCleanNtGrid() {
 	let nextTetroInnerHTML = ''
 	for (let y = 0; y < 4; y++) {
@@ -132,6 +138,9 @@ function drawCleanNtGrid() {
 	while (ntCells.length) ntCellsArr.push(ntCells.splice(0, 4))
 }
 
+/**
+ * Draws playfield list to page. Opacity 1 means cell is displayed, 0 - not
+ */
 function draw() {
 	for (let y = 0; y < playField.length; y++) {
 		for (let x = 0; x < playField[y].length; x++) {
@@ -146,6 +155,9 @@ function draw() {
 	}
 }
 
+/**
+ * Works like draw() method but for next tetromino
+ */
 function drawNextTetro() {
 	ntCellsArr.forEach((row) => {
 		row.forEach((cell) => {
@@ -163,6 +175,9 @@ function drawNextTetro() {
 	}
 }
 
+/**
+ * Removes all "1" from playfield, used in addActiveTetro()
+ */
 function removePrevActiveTetro() {
 	for (let y = 0; y < playField.length; y++) {
 		for (let x = 0; x < playField[y].length; x++) {
@@ -173,6 +188,9 @@ function removePrevActiveTetro() {
 	}
 }
 
+/**
+ * Uses removePrevActiveTetro() to clear all "1" and add them one row down
+ */
 function addActiveTetro() {
 	removePrevActiveTetro()
 	for (let y = 0; y < activeTetro.shape.length; y++) {
@@ -183,7 +201,9 @@ function addActiveTetro() {
 		}
 	}
 }
-
+/**
+ * Rotates list and if there're any collisions sets previous shape
+ */
 function rotateTetro() {
 	const prevTetroState = activeTetro.shape
 	activeTetro.shape = activeTetro.shape[0].map((val, index) => activeTetro.shape.map((row) => row[index]).reverse())
@@ -192,6 +212,9 @@ function rotateTetro() {
 	}
 }
 
+/**
+ * Checks if tetromino is in playfield borders, not placed in taken cell (checks only "1" because shape object is square of "1" and "0")
+ */
 function hasCollisions() {
 	for (let y = 0; y < activeTetro.shape.length; y++) {
 		for (let x = 0; x < activeTetro.shape[y].length; x++) {
@@ -203,6 +226,9 @@ function hasCollisions() {
 	return false
 }
 
+/**
+ * Iterates over all playfield and checks if full row contains only "2" (taken cell). If yes - deletes row and adds new, full of zeros. After that, adds points according to current level
+ */
 function removeFullLines() {
 	let canRemoveLine = true,
 		filledLines = 0
@@ -244,7 +270,9 @@ function removeFullLines() {
 		levelElem.innerHTML = currentLevel
 	}
 }
-
+/**
+ * Returns tetromino object that has centered x coordinate, y coordinate and random shape
+ */
 function getNewTetro() {
 	const possibleFigures = 'IOLJTSZ'
 	const rand = Math.floor(Math.random() * 7)
@@ -256,6 +284,9 @@ function getNewTetro() {
 	}
 }
 
+/**
+ * Changes all "1" (active tetromino) to "2" (fixed tetromino)
+ */
 function fixTetro() {
 	for (let y = 0; y < playField.length; y++) {
 		for (let x = 0; x < playField[y].length; x++) {
@@ -265,7 +296,9 @@ function fixTetro() {
 		}
 	}
 }
-
+/**
+ * Changes y coordinate of active shape. If shape has collisions on new coordinate, coordinate is reduced by 1 and tetromino is fixed, playfield is checked for fullLines, next tetro become active. If new shape already has collisions game is reset
+ */
 function moveTetroDown() {
 	activeTetro.y += 1
 	if (hasCollisions()) {
@@ -280,6 +313,9 @@ function moveTetroDown() {
 	}
 }
 
+/**
+ * Drops tetro to bottom
+ */
 function dropTetro() {
 	for (let y = activeTetro.y; y < playField.length; y++) {
 		activeTetro.y += 1
@@ -289,7 +325,10 @@ function dropTetro() {
 		}
 	}
 }
-
+/**
+ * Reset game state
+ * @param {bool} manualReset check if it's manual reset or game over
+ */
 function reset(manualReset = false) {
 	playField = [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -325,6 +364,10 @@ function reset(manualReset = false) {
 	}
 }
 
+/**
+ * Arrows and space controls
+ * @param {event} e default argument is passed to get keycodes
+ */
 document.onkeydown = function (e) {
 	if (!isPaused) {
 		if (e.keyCode === 37) {
@@ -348,6 +391,9 @@ document.onkeydown = function (e) {
 	}
 }
 
+/**
+ * Updates game state every "possibleLevels[currentLevel].speed" seconds
+ */
 function updateGameState() {
 	addActiveTetro()
 	draw()
@@ -382,6 +428,9 @@ levelElem.innerHTML = currentLevel
 // draw()
 drawNewPlayfield()
 
+/**
+ * Main function for setInterval
+ */
 function startGame() {
 	moveTetroDown()
 	updateGameState()
