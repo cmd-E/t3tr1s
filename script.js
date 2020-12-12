@@ -392,7 +392,7 @@ document.onkeydown = function (e) {
 }
 
 /**
- * Updates game state every "possibleLevels[currentLevel].speed" seconds
+ * Updates page (moves "1" in playfield list, draws playfield on page, draws next tetromino on page) every "possibleLevels[currentLevel].speed" seconds
  */
 function updateGameState() {
 	addActiveTetro()
@@ -432,6 +432,6 @@ drawNewPlayfield()
  * Main function for setInterval
  */
 function startGame() {
-	moveTetroDown()
 	updateGameState()
+	moveTetroDown()
 }
