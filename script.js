@@ -366,7 +366,7 @@ function reset(manualReset = false) {
 
 /**
  * Arrows and space controls
- * @param {event} e default argument is passed to get keycodes
+ * @param {event} e default argument is passed to get keycodes. ISSUE: if arrow down pressed in the same time whem game moves tetro down, tetro will float above the latest row
  */
 document.onkeydown = function (e) {
 	if (!isPaused) {
@@ -381,7 +381,8 @@ document.onkeydown = function (e) {
 				activeTetro.x -= 1
 			}
 		} else if (e.keyCode === 40) {
-			moveTetroDown()
+			// moveTetroDown()
+			dropTetro()
 		} else if (e.keyCode === 38) {
 			rotateTetro()
 		} else if (e.keyCode === 32) {
@@ -425,8 +426,7 @@ startBtn.addEventListener('click', (e) => {
 scoreElem.innerHTML = score
 levelElem.innerHTML = currentLevel
 
-// draw()
-drawNewPlayfield()
+requestAnimationFrame(drawNewPlayfield)
 
 /**
  * Main function for setInterval
