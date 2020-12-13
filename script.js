@@ -241,9 +241,7 @@ function removeFullLines() {
 		}
 		if (canRemoveLine) {
 			playField.splice(y, 1)
-			// requestAnimationFrame(playField.splice(y, 1))
 			playField.splice(0, 0, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-			// requestAnimationFrame(playField.splice(0, 0, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]))
 			filledLines += 1
 		}
 		canRemoveLine = true
