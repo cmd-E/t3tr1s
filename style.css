@@ -9,11 +9,6 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-/* .heart-box {
-	display: flexbox;
-	flex-wrap: wrap;
-} */
-
 .heart {
 	height: 20px;
 	width: 20px;
