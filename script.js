@@ -381,11 +381,9 @@ document.onkeydown = function (e) {
 				activeTetro.x -= 1
 			}
 		} else if (e.keyCode === 40) {
-			moveTetroDown()
+			dropTetro()
 		} else if (e.keyCode === 38) {
 			rotateTetro()
-		} else if (e.keyCode === 32) {
-			dropTetro()
 		}
 		updateGameState()
 	}
