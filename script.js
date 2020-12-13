@@ -241,7 +241,9 @@ function removeFullLines() {
 		}
 		if (canRemoveLine) {
 			playField.splice(y, 1)
+			// requestAnimationFrame(playField.splice(y, 1))
 			playField.splice(0, 0, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+			// requestAnimationFrame(playField.splice(0, 0, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]))
 			filledLines += 1
 		}
 		canRemoveLine = true
@@ -304,7 +306,8 @@ function moveTetroDown() {
 	if (hasCollisions()) {
 		activeTetro.y -= 1
 		fixTetro()
-		removeFullLines()
+		// removeFullLines()
+		requestAnimationFrame(removeFullLines)
 		activeTetro = nextTetro
 		if (hasCollisions()) {
 			reset()
@@ -394,8 +397,10 @@ document.onkeydown = function (e) {
  */
 function updateGameState() {
 	addActiveTetro()
-	draw()
-	drawNextTetro()
+	// draw()
+	requestAnimationFrame(draw)
+	// drawNextTetro()
+	requestAnimationFrame(drawNextTetro)
 }
 
 pauseBtn.addEventListener('click', (e) => {
