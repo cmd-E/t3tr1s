@@ -9,6 +9,17 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+/* .heart-box {
+	display: flexbox;
+	flex-wrap: wrap;
+} */
+
+.heart {
+	height: 20px;
+	width: 20px;
+	background-color: red;
+}
+
 #game {
 	padding-top: 20px;
 	font-size: 40px;
