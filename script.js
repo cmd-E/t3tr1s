@@ -9,8 +9,10 @@ let ntCellsArr = [] // List of lists. Inner list contains rows of next tetromino
 const startBtn = document.getElementById('start')
 const pauseBtn = document.getElementById('pause')
 const gameOver = document.getElementById('game-over')
+const gamePaused = document.getElementById('game-paused')
 let livesImages = Array.from(document.querySelectorAll('img'))
 let heartBox = document.querySelector('.heart-box')
+let pauseCover = document.querySelector('.pause-cover')
 console.log(livesImages)
 let playField = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -337,12 +339,13 @@ function dropTetro() {
 		}
 	}
 }
+console.log(gamePaused.style.display, gamePaused.style.zIndex)
+
 /**
  * Reset game state
  * @param {bool} manualReset check if it's manual reset or game over
  */
 function reset(manualReset = false) {
-	debugger
 	playField = [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -366,6 +369,12 @@ function reset(manualReset = false) {
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	]
 	if (manualReset) {
+		// debugger
+		console.log(gamePaused.style.display, gamePaused.style.zIndex)
+		gamePaused.style.display = 'none'
+		pauseCover.style.zIndex = '0'
+		console.log(gamePaused.style.display, gamePaused.style.zIndex)
+
 		activeTetro = getNewTetro()
 		nextTetro = getNewTetro()
 		updateGameState()
@@ -438,9 +447,13 @@ function updateLevel() {
 pauseBtn.addEventListener('click', (e) => {
 	if (e.target.innerHTML === 'Пауза') {
 		e.target.innerHTML = 'Продолжить'
+		pauseCover.style.zIndex = '2'
+		gamePaused.style.display = 'block'
 		clearInterval(gameTimerID)
 	} else {
 		e.target.innerHTML = 'Пауза'
+		gamePaused.style.display = 'none'
+		pauseCover.style.zIndex = '0'
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
 	}
 	isPaused = !isPaused

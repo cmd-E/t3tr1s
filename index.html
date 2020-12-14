@@ -13,15 +13,20 @@
         <div>Level: <span id="level">0</span></div>
         <div>Score: <span id="score">0</span></div>
         <div class="heart-box">
-            <!-- <div class="heart"></div> -->
             <img id="live1" src="./heart.png" alt="life1">
             <img id="live2" src="./heart.png" alt="life2">
             <img id="live3" src="./heart.png" alt="life3">
         </div>
         
         <!-- 10 x 20 -->
-        <div class="main"></div>
-        <div id="game-over">Игра окончена</div>
+        <div class="playfield-container">
+            <div class="main"></div>
+            <div class="pause-cover"></div>
+            <div id="game-over">Игра окончена</div>
+            <div id="game-paused">Пауза</div>
+        </div>
+        <!-- <div class="main"></div>
+        <div class="pause-cover"><p>Пауза</p></div> -->
         <div id="next-tetro"></div>
     </div>
     <script src="./script.js"></script>
