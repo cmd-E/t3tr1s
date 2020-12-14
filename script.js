@@ -6,8 +6,8 @@ const levelElem = document.getElementById('level')
 const nextTetroElem = document.getElementById('next-tetro')
 let ntCells = [] // cells of next tetromino area
 let ntCellsArr = [] // List of lists. Inner list contains rows of next tetromino cells (4 in each)
-const startBtn = document.getElementById('start')
-const pauseBtn = document.getElementById('pause')
+const startPauseBtn = document.getElementById('startPause')
+// const pauseBtn = document.getElementById('pause')
 const gameOver = document.getElementById('game-over')
 let livesImages = Array.from(document.querySelectorAll('img'))
 let pauseCover = document.querySelector('.pause-cover')
@@ -438,30 +438,39 @@ function updateLevel() {
 	levelElem.innerHTML = currentLevel
 }
 
-pauseBtn.addEventListener('click', (e) => {
-	if (e.target.innerHTML === 'Пауза') {
-		e.target.innerHTML = 'Продолжить'
+// pauseBtn.addEventListener('click', (e) => {
+// 	if (e.target.innerHTML === 'Пауза') {
+// 		e.target.innerHTML = 'Продолжить'
+// 		pauseCover.style.display = 'block'
+// 		clearInterval(gameTimerID)
+// 	} else {
+// 		e.target.innerHTML = 'Пауза'
+// 		pauseCover.style.display = 'none'
+// 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
+// 	}
+// 	isPaused = !isPaused
+// })
+
+startPauseBtn.addEventListener('click', (e) => {
+	debugger
+	if (!gameTimerID) {
+		// gameOver.style.display = 'block'
+		restoreLives()
+		// isPaused = false
+		e.target.innerHTML = 'Пауза'
+		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
+		gameOver.style.display = 'none'
+	} else if (e.target.innerHTML === 'Пауза') {
+		e.target.innerHTML = 'Старт'
 		pauseCover.style.display = 'block'
 		clearInterval(gameTimerID)
 	} else {
-		e.target.innerHTML = 'Пауза'
-		pauseCover.style.display = 'none'
+		// reset(true)
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
+		pauseCover.style.display = 'none'
+		// clearInterval(gameTimerID)
 	}
 	isPaused = !isPaused
-})
-
-startBtn.addEventListener('click', (e) => {
-	if (!gameTimerID) {
-		gameOver.style.display = 'block'
-		restoreLives()
-		isPaused = false
-		e.target.innerHTML = 'Перезапустить'
-		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
-		gameOver.style.display = 'none'
-	} else {
-		reset(true)
-	}
 })
 
 function restoreLives() {
