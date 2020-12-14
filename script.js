@@ -9,11 +9,8 @@ let ntCellsArr = [] // List of lists. Inner list contains rows of next tetromino
 const startBtn = document.getElementById('start')
 const pauseBtn = document.getElementById('pause')
 const gameOver = document.getElementById('game-over')
-const gamePaused = document.getElementById('game-paused')
 let livesImages = Array.from(document.querySelectorAll('img'))
-let heartBox = document.querySelector('.heart-box')
 let pauseCover = document.querySelector('.pause-cover')
-console.log(livesImages)
 let playField = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -339,7 +336,7 @@ function dropTetro() {
 		}
 	}
 }
-console.log(gamePaused.style.display, gamePaused.style.zIndex)
+// console.log(gamePaused.style.display, gamePaused.style.zIndex)
 
 /**
  * Reset game state
@@ -369,12 +366,8 @@ function reset(manualReset = false) {
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	]
 	if (manualReset) {
-		// debugger
-		console.log(gamePaused.style.display, gamePaused.style.zIndex)
 		gamePaused.style.display = 'none'
 		pauseCover.style.zIndex = '0'
-		console.log(gamePaused.style.display, gamePaused.style.zIndex)
-
 		activeTetro = getNewTetro()
 		nextTetro = getNewTetro()
 		updateGameState()
@@ -389,6 +382,7 @@ function reset(manualReset = false) {
 		requestAnimationFrame(updateScore)
 		requestAnimationFrame(updateLevel)
 		requestAnimationFrame(removeLife)
+		debugger
 		clearInterval(gameTimerID)
 		gameTimerID = undefined
 		isPaused = true
@@ -447,13 +441,11 @@ function updateLevel() {
 pauseBtn.addEventListener('click', (e) => {
 	if (e.target.innerHTML === 'Пауза') {
 		e.target.innerHTML = 'Продолжить'
-		pauseCover.style.zIndex = '2'
-		gamePaused.style.display = 'block'
+		pauseCover.style.display = 'block'
 		clearInterval(gameTimerID)
 	} else {
 		e.target.innerHTML = 'Пауза'
-		gamePaused.style.display = 'none'
-		pauseCover.style.zIndex = '0'
+		pauseCover.style.display = 'none'
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
 	}
 	isPaused = !isPaused
@@ -461,6 +453,7 @@ pauseBtn.addEventListener('click', (e) => {
 
 startBtn.addEventListener('click', (e) => {
 	if (!gameTimerID) {
+		gameOver.style.display = 'block'
 		restoreLives()
 		isPaused = false
 		e.target.innerHTML = 'Перезапустить'

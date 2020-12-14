@@ -12,7 +12,7 @@ body {
 	display: inline-block;
 	width: 95px;
 	height: 50px;
-	border: 2px dashed silver;
+	/* border: 2px dashed silver; */
 }
 #game {
 	padding-top: 20px;
@@ -26,13 +26,19 @@ body {
 	height: 620px;
 	margin: 20px auto 0;
 	border: 10px solid silver;
-	font-size: 0; /*Без него между ячеками образуется пространство*/
+	font-size: 50px; /*Без него между ячеками образуется пространство*/
 	background-color: gray;
-	display: flex;
+	/* display: flex; */
+	display: none;
+	text-align: center;
 	justify-content: center;
 	align-items: center;
-	z-index: 0;
 	position: absolute;
+	z-index: 1;
+}
+
+.pause-cover * {
+	margin: 100px auto;
 }
 
 .playfield-container {
@@ -47,7 +53,7 @@ body {
 	border: 10px solid silver;
 	font-size: 0; /*Без него между ячеками образуется пространство*/
 	background-color: black;
-	z-index: 1;
+	z-index: 0;
 	position: absolute;
 }
 
@@ -75,7 +81,7 @@ body {
 	left: 200px;
 }
 
-#game-over {
+/* #game-over {
 	font-size: 100px;
 	text-align: center;
 	color: red;
@@ -85,9 +91,32 @@ body {
 	left: 50%;
 	z-index: 3;
 	transform: translate(-50%, 200%);
+} */
+
+#game-over {
+	width: 320px;
+	height: 620px;
+	margin: 20px auto 0;
+	border: 10px solid silver;
+	font-size: 50px; /*Без него между ячеками образуется пространство*/
+	background-color: grey;
+	/* display: flex; */
+	display: none;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	z-index: 1;
 }
 
-#game-paused {
+#game-over * {
+	margin: 100px auto;
+}
+#game-over p {
+	background-color: red;
+}
+
+/* #game-paused {
 	font-size: 100px;
 	text-align: center;
 	color: white;
@@ -97,4 +126,4 @@ body {
 	left: 50%;
 	z-index: 3;
 	transform: translate(-50%, 200%);
-}
+} */
