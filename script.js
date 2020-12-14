@@ -253,26 +253,33 @@ function removeFullLines() {
 	switch (filledLines) {
 		case 1:
 			score += possibleLevels[currentLevel].scorePerLine
-			scoreElem.innerHTML = score
+			// scoreElem.innerHTML = score
+			requestAnimationFrame(updateScore)
 			break
 		case 2:
 			score += possibleLevels[currentLevel].scorePerLine * 3
-			scoreElem.innerHTML = score
+			// scoreElem.innerHTML = score
+			requestAnimationFrame(updateScore)
 			break
 		case 3:
 			score += possibleLevels[currentLevel].scorePerLine * 6
-			scoreElem.innerHTML = score
+			// scoreElem.innerHTML = score
+			requestAnimationFrame(updateScore)
 			break
 		case 4:
 			score += possibleLevels[currentLevel].scorePerLine * 12
-			scoreElem.innerHTML = score
+			// scoreElem.innerHTML = score
+			requestAnimationFrame(updateScore)
 			break
 	}
 
 	if (score >= possibleLevels[currentLevel].nextLevelScore) {
 		currentLevel++
-		levelElem.innerHTML = currentLevel
+		requestAnimationFrame(updateLevel)
+		// levelElem.innerHTML = currentLevel
 	}
+	updateScore()
+	updateLevel()
 }
 /**
  * Returns tetromino object that has centered x coordinate, y coordinate and random shape
@@ -365,11 +372,14 @@ function reset(manualReset = false) {
 	} else {
 		deaths++
 		if (deaths < maxDeathCount) {
-			removeLife()
+			requestAnimationFrame(removeLife)
 			return
 		}
-		removeLife()
-		// heartBox.style.display = 'none'
+		score = 0
+		currentLevel = 1
+		requestAnimationFrame(updateScore)
+		requestAnimationFrame(updateLevel)
+		requestAnimationFrame(removeLife)
 		clearInterval(gameTimerID)
 		gameTimerID = undefined
 		isPaused = true
@@ -379,7 +389,6 @@ function reset(manualReset = false) {
 
 function removeLife() {
 	for (let i = 0; i < deaths; i++) {
-		// console.log(livesImages[i])
 		livesImages[i].style.display = 'none'
 	}
 }
@@ -416,6 +425,14 @@ function updateGameState() {
 	addActiveTetro()
 	requestAnimationFrame(draw)
 	requestAnimationFrame(drawNextTetro)
+}
+
+function updateScore() {
+	scoreElem.innerHTML = score
+}
+
+function updateLevel() {
+	levelElem.innerHTML = currentLevel
 }
 
 pauseBtn.addEventListener('click', (e) => {
