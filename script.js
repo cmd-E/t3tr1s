@@ -454,21 +454,17 @@ function updateLevel() {
 startPauseBtn.addEventListener('click', (e) => {
 	debugger
 	if (!gameTimerID) {
-		// gameOver.style.display = 'block'
 		restoreLives()
-		// isPaused = false
 		e.target.innerHTML = 'Пауза'
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
 		gameOver.style.display = 'none'
-	} else if (e.target.innerHTML === 'Пауза') {
+	} else if (!isPaused) {
 		e.target.innerHTML = 'Старт'
 		pauseCover.style.display = 'block'
 		clearInterval(gameTimerID)
 	} else {
-		// reset(true)
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
 		pauseCover.style.display = 'none'
-		// clearInterval(gameTimerID)
 	}
 	isPaused = !isPaused
 })
