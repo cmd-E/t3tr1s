@@ -9,7 +9,9 @@ let ntCellsArr = [] // List of lists. Inner list contains rows of next tetromino
 const startBtn = document.getElementById('start')
 const pauseBtn = document.getElementById('pause')
 const gameOver = document.getElementById('game-over')
-
+let livesImages = Array.from(document.querySelectorAll('img'))
+let heartBox = document.querySelector('.heart-box')
+console.log(livesImages)
 let playField = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -33,6 +35,8 @@ let playField = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
+const maxDeathCount = 3
+let deaths = 0
 let gameTimerID
 let isPaused = true
 let score = 0
@@ -331,6 +335,7 @@ function dropTetro() {
  * @param {bool} manualReset check if it's manual reset or game over
  */
 function reset(manualReset = false) {
+	debugger
 	playField = [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -358,10 +363,24 @@ function reset(manualReset = false) {
 		nextTetro = getNewTetro()
 		updateGameState()
 	} else {
+		deaths++
+		if (deaths < maxDeathCount) {
+			removeLife()
+			return
+		}
+		removeLife()
+		// heartBox.style.display = 'none'
 		clearInterval(gameTimerID)
 		gameTimerID = undefined
 		isPaused = true
 		gameOver.style.display = 'block'
+	}
+}
+
+function removeLife() {
+	for (let i = 0; i < deaths; i++) {
+		// console.log(livesImages[i])
+		livesImages[i].style.display = 'none'
 	}
 }
 
@@ -395,9 +414,7 @@ document.onkeydown = function (e) {
  */
 function updateGameState() {
 	addActiveTetro()
-	// draw()
 	requestAnimationFrame(draw)
-	// drawNextTetro()
 	requestAnimationFrame(drawNextTetro)
 }
 
@@ -414,6 +431,7 @@ pauseBtn.addEventListener('click', (e) => {
 
 startBtn.addEventListener('click', (e) => {
 	if (!gameTimerID) {
+		restoreLives()
 		isPaused = false
 		e.target.innerHTML = 'Перезапустить'
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
@@ -422,6 +440,13 @@ startBtn.addEventListener('click', (e) => {
 		reset(true)
 	}
 })
+
+function restoreLives() {
+	deaths = 0
+	for (let i = 0; i < livesImages.length; i++) {
+		livesImages[i].style.display = 'inline-block'
+	}
+}
 
 scoreElem.innerHTML = score
 levelElem.innerHTML = currentLevel
