@@ -7,7 +7,8 @@ const nextTetroElem = document.getElementById('next-tetro')
 let ntCells = [] // cells of next tetromino area
 let ntCellsArr = [] // List of lists. Inner list contains rows of next tetromino cells (4 in each)
 const startPauseBtn = document.getElementById('startPause')
-// const pauseBtn = document.getElementById('pause')
+const restartBtn = document.getElementById('restartBtn')
+const restartBtn2 = document.getElementById('restartBtn2') // button from gameover menu
 const gameOver = document.getElementById('game-over')
 let livesImages = Array.from(document.querySelectorAll('img'))
 let pauseCover = document.querySelector('.pause-cover')
@@ -343,6 +344,7 @@ function dropTetro() {
  * @param {bool} manualReset check if it's manual reset or game over
  */
 function reset(manualReset = false) {
+	debugger
 	playField = [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -366,12 +368,21 @@ function reset(manualReset = false) {
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	]
 	if (manualReset) {
-		gamePaused.style.display = 'none'
-		pauseCover.style.zIndex = '0'
+		// gamePaused.style.display = 'none'
+		pauseCover.style.display = 'none'
 		activeTetro = getNewTetro()
 		nextTetro = getNewTetro()
 		updateGameState()
+		score = 0
+		currentLevel = 1
+		requestAnimationFrame(updateScore)
+		requestAnimationFrame(updateLevel)
+		requestAnimationFrame(removeLife)
+		clearInterval(gameTimerID)
+		gameTimerID = undefined
+		isPaused = true
 	} else {
+		debugger
 		deaths++
 		if (deaths < maxDeathCount) {
 			requestAnimationFrame(removeLife)
@@ -452,7 +463,7 @@ function updateLevel() {
 // })
 
 startPauseBtn.addEventListener('click', (e) => {
-	debugger
+	// debugger
 	if (!gameTimerID) {
 		restoreLives()
 		e.target.innerHTML = 'Пауза'
@@ -467,6 +478,22 @@ startPauseBtn.addEventListener('click', (e) => {
 		pauseCover.style.display = 'none'
 	}
 	isPaused = !isPaused
+})
+
+restartBtn.addEventListener('click', () => {
+	reset(true)
+})
+
+restartBtn2.addEventListener('click', () => {
+	debugger
+	reset()
+	gameOver.style.display = 'none'
+	startPauseBtn.textContent = 'Старт'
+	ntCellsArr.forEach((row) => {
+		row.forEach((cell) => {
+			cell.style.opacity = 0
+		})
+	})
 })
 
 function restoreLives() {
