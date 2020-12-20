@@ -85,7 +85,7 @@ body {
 	height: 620px;
 	margin: 20px auto 0;
 	border: 10px solid silver;
-	font-size: 50px; /*Без него между ячеками образуется пространство*/
+	font-size: 40px; /*Без него между ячеками образуется пространство*/
 	background-color: grey;
 	display: none;
 	text-align: center;
