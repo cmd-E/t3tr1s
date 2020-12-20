@@ -382,6 +382,7 @@ function reset(manualReset = false) {
 			startStopwatch()
 			return
 		}
+		document.getElementById('go-score').innerHTML = score
 		score = 0
 		currentLevel = 1
 		requestAnimationFrame(updateScore)
