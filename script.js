@@ -466,15 +466,18 @@ startPauseBtn.addEventListener('click', (e) => {
 	// debugger
 	if (!gameTimerID) {
 		restoreLives()
+		interval = setInterval(stopwatch, 1000)
 		e.target.innerHTML = 'Пауза'
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
 		gameOver.style.display = 'none'
 	} else if (!isPaused) {
 		e.target.innerHTML = 'Старт'
 		pauseCover.style.display = 'block'
+		clearInterval(interval)
 		clearInterval(gameTimerID)
 	} else {
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
+		interval = setInterval(stopwatch, 1000)
 		pauseCover.style.display = 'none'
 	}
 	isPaused = !isPaused
@@ -514,4 +517,51 @@ requestAnimationFrame(drawNewPlayfield)
 function startGame() {
 	updateGameState()
 	moveTetroDown()
+}
+
+// define vars to hold time values
+let seconds = 0
+let minutes = 0
+let hours = 0
+
+// Define vars to hold disply values
+
+let displaySeconds = 0
+let displayMinutes = 0
+let displayHours = 0
+
+let interval = null
+
+let status = 'stopped'
+
+function stopwatch() {
+	seconds++
+	if (seconds / 60 === 1) {
+		seconds = 0
+		minutes++
+		if (minutes / 60 === 1) {
+			minutes = 0
+			hours++
+		}
+	}
+
+	if (seconds < 10) {
+		displaySeconds = `0${seconds}`
+	} else {
+		displaySeconds = seconds
+	}
+
+	if (minutes < 10) {
+		displayMinutes = `0${minutes}`
+	} else {
+		displayMinutes = minutes
+	}
+
+	if (hours < 10) {
+		displayHours = `0${hours}`
+	} else {
+		displayHours = displayHours
+	}
+
+	document.getElementById('display').innerHTML = `${displayHours}:${displayMinutes}:${displaySeconds}`
 }
