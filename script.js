@@ -345,6 +345,7 @@ function dropTetro() {
  */
 function reset(manualReset = false) {
 	debugger
+	resetStopwatch()
 	playField = [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -564,4 +565,12 @@ function stopwatch() {
 	}
 
 	document.getElementById('display').innerHTML = `${displayHours}:${displayMinutes}:${displaySeconds}`
+}
+
+function resetStopwatch() {
+	clearInterval(interval)
+	seconds = 0
+	minutes = 0
+	hours = 0
+	document.getElementById('display').innerHTML = `00:00:00`
 }
