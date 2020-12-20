@@ -458,6 +458,7 @@ startPauseBtn.addEventListener('click', (e) => {
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
 		startStopwatch()
 		pauseCover.style.display = 'none'
+		e.target.innerHTML = 'Пауза'
 	}
 	isPaused = !isPaused
 })
