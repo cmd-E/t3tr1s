@@ -379,6 +379,7 @@ function reset(manualReset = false) {
 		deaths++
 		if (deaths < maxDeathCount) {
 			requestAnimationFrame(removeLife)
+			startStopwatch()
 			return
 		}
 		score = 0
