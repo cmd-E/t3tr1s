@@ -344,8 +344,7 @@ function dropTetro() {
  * @param {bool} manualReset check if it's manual reset or game over
  */
 function reset(manualReset = false) {
-	debugger
-	resetStopwatch()
+	resetStopWatch()
 	playField = [
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -450,35 +449,25 @@ function updateLevel() {
 	levelElem.innerHTML = currentLevel
 }
 
-// pauseBtn.addEventListener('click', (e) => {
-// 	if (e.target.innerHTML === 'Пауза') {
-// 		e.target.innerHTML = 'Продолжить'
-// 		pauseCover.style.display = 'block'
-// 		clearInterval(gameTimerID)
-// 	} else {
-// 		e.target.innerHTML = 'Пауза'
-// 		pauseCover.style.display = 'none'
-// 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
-// 	}
-// 	isPaused = !isPaused
-// })
-
 startPauseBtn.addEventListener('click', (e) => {
 	// debugger
 	if (!gameTimerID) {
 		restoreLives()
-		interval = setInterval(stopwatch, 1000)
+		// interval = setInterval(startStopwatch, 1000)
+		startStopwatch()
 		e.target.innerHTML = 'Пауза'
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
 		gameOver.style.display = 'none'
 	} else if (!isPaused) {
 		e.target.innerHTML = 'Старт'
 		pauseCover.style.display = 'block'
-		clearInterval(interval)
+		// clearInterval(interval)
+		pauseStopWatch()
 		clearInterval(gameTimerID)
 	} else {
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
-		interval = setInterval(stopwatch, 1000)
+		// interval = setInterval(stopwatch, 1000)
+		startStopwatch()
 		pauseCover.style.display = 'none'
 	}
 	isPaused = !isPaused
@@ -520,57 +509,45 @@ function startGame() {
 	moveTetroDown()
 }
 
-// define vars to hold time values
-let seconds = 0
-let minutes = 0
-let hours = 0
+function timeToString(time) {
+	let diffInHrs = time / 3600000
+	let hh = Math.floor(diffInHrs)
 
-// Define vars to hold disply values
+	let diffInMin = (diffInHrs - hh) * 60
+	let mm = Math.floor(diffInMin)
 
-let displaySeconds = 0
-let displayMinutes = 0
-let displayHours = 0
+	let diffInSec = (diffInMin - mm) * 60
+	let ss = Math.floor(diffInSec)
 
-let interval = null
+	let formattedHH = hh.toString().padStart(2, '0')
+	let formattedMM = mm.toString().padStart(2, '0')
+	let formattedSS = ss.toString().padStart(2, '0')
 
-let status = 'stopped'
-
-function stopwatch() {
-	seconds++
-	if (seconds / 60 === 1) {
-		seconds = 0
-		minutes++
-		if (minutes / 60 === 1) {
-			minutes = 0
-			hours++
-		}
-	}
-
-	if (seconds < 10) {
-		displaySeconds = `0${seconds}`
-	} else {
-		displaySeconds = seconds
-	}
-
-	if (minutes < 10) {
-		displayMinutes = `0${minutes}`
-	} else {
-		displayMinutes = minutes
-	}
-
-	if (hours < 10) {
-		displayHours = `0${hours}`
-	} else {
-		displayHours = displayHours
-	}
-
-	document.getElementById('display').innerHTML = `${displayHours}:${displayMinutes}:${displaySeconds}`
+	return `${formattedHH}:${formattedMM}:${formattedSS}`
 }
 
-function resetStopwatch() {
-	clearInterval(interval)
-	seconds = 0
-	minutes = 0
-	hours = 0
-	document.getElementById('display').innerHTML = `00:00:00`
+let startTime
+let elapsedTime = 0
+let timerInterval
+
+function updateTimeOnPage(txt) {
+	document.getElementById('display').innerHTML = txt
+}
+
+function startStopwatch() {
+	startTime = Date.now() - elapsedTime
+	timerInterval = setInterval(function printTime() {
+		elapsedTime = Date.now() - startTime
+		updateTimeOnPage(timeToString(elapsedTime))
+	}, 10)
+}
+
+function pauseStopWatch() {
+	clearInterval(timerInterval)
+}
+
+function resetStopWatch() {
+	clearInterval(timerInterval)
+	updateTimeOnPage('00:00:00')
+	elapsedTime = 0
 }
