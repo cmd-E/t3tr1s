@@ -253,22 +253,18 @@ function removeFullLines() {
 	switch (filledLines) {
 		case 1:
 			score += possibleLevels[currentLevel].scorePerLine
-			// scoreElem.innerHTML = score
 			requestAnimationFrame(updateScore)
 			break
 		case 2:
 			score += possibleLevels[currentLevel].scorePerLine * 3
-			// scoreElem.innerHTML = score
 			requestAnimationFrame(updateScore)
 			break
 		case 3:
 			score += possibleLevels[currentLevel].scorePerLine * 6
-			// scoreElem.innerHTML = score
 			requestAnimationFrame(updateScore)
 			break
 		case 4:
 			score += possibleLevels[currentLevel].scorePerLine * 12
-			// scoreElem.innerHTML = score
 			requestAnimationFrame(updateScore)
 			break
 	}
@@ -276,7 +272,6 @@ function removeFullLines() {
 	if (score >= possibleLevels[currentLevel].nextLevelScore) {
 		currentLevel++
 		requestAnimationFrame(updateLevel)
-		// levelElem.innerHTML = currentLevel
 	}
 	updateScore()
 	updateLevel()
@@ -368,7 +363,6 @@ function reset(manualReset = false) {
 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	]
 	if (manualReset) {
-		// gamePaused.style.display = 'none'
 		pauseCover.style.display = 'none'
 		activeTetro = getNewTetro()
 		nextTetro = getNewTetro()
@@ -382,7 +376,6 @@ function reset(manualReset = false) {
 		gameTimerID = undefined
 		isPaused = true
 	} else {
-		debugger
 		deaths++
 		if (deaths < maxDeathCount) {
 			requestAnimationFrame(removeLife)
@@ -450,10 +443,8 @@ function updateLevel() {
 }
 
 startPauseBtn.addEventListener('click', (e) => {
-	// debugger
 	if (!gameTimerID) {
 		restoreLives()
-		// interval = setInterval(startStopwatch, 1000)
 		startStopwatch()
 		e.target.innerHTML = 'Пауза'
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
@@ -461,12 +452,10 @@ startPauseBtn.addEventListener('click', (e) => {
 	} else if (!isPaused) {
 		e.target.innerHTML = 'Старт'
 		pauseCover.style.display = 'block'
-		// clearInterval(interval)
 		pauseStopWatch()
 		clearInterval(gameTimerID)
 	} else {
 		gameTimerID = setInterval(startGame, possibleLevels[currentLevel].speed)
-		// interval = setInterval(stopwatch, 1000)
 		startStopwatch()
 		pauseCover.style.display = 'none'
 	}
@@ -478,7 +467,6 @@ restartBtn.addEventListener('click', () => {
 })
 
 restartBtn2.addEventListener('click', () => {
-	debugger
 	reset()
 	gameOver.style.display = 'none'
 	startPauseBtn.textContent = 'Старт'
