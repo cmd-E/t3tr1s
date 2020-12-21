@@ -4,7 +4,7 @@
 
 body {
 	margin: 0;
-	background: black;
+	background: rgb(154, 166, 128);
 	color: white;
 	font-family: Arial, Helvetica, sans-serif;
 }
@@ -12,7 +12,6 @@ body {
 	display: inline-block;
 	width: 95px;
 	height: 50px;
-	/* border: 2px dashed silver; */
 }
 
 #game {
@@ -48,12 +47,13 @@ body {
 
 .main {
 	/*+20 пикселей для рамки*/
-	width: 320px;
-	height: 620px;
+	width: 307px;
+	height: 607px;
 	margin: 20px auto 0;
-	border: 10px solid silver;
+	border: 3px solid black;
 	font-size: 0; /*Без него между ячеками образуется пространство*/
-	background-color: black;
+	/* background-color: black; */
+	background: rgb(154, 166, 128);
 	z-index: 0;
 	position: absolute;
 }
@@ -63,7 +63,7 @@ body {
 	height: 30px;
 	border: 1px solid silver;
 	display: inline-block;
-	background-color: blue;
+	background-color: black;
 	will-change: opacity;
 }
 
