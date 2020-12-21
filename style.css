@@ -4,9 +4,10 @@
 
 body {
 	margin: 0;
-	background: black;
-	color: white;
-	font-family: Arial, Helvetica, sans-serif;
+	background: rgb(154, 166, 128);
+	color: black;
+	/* font-family: Arial, Helvetica, sans-serif; */
+	font-family: segments;
 }
 .heart-box {
 	display: inline-block;
@@ -46,12 +47,13 @@ body {
 
 .main {
 	/*+20 пикселей для рамки*/
-	width: 320px;
-	height: 620px;
+	width: 307px;
+	height: 607px;
 	margin: 20px auto 0;
-	border: 10px solid silver;
+	border: 3px solid black;
 	font-size: 0; /*Без него между ячеками образуется пространство*/
-	background-color: black;
+	/* background-color: black; */
+	background: rgb(154, 166, 128);
 	z-index: 0;
 	position: absolute;
 }
@@ -61,7 +63,7 @@ body {
 	height: 30px;
 	border: 1px solid silver;
 	display: inline-block;
-	background-color: blue;
+	background-color: black;
 	will-change: opacity;
 }
 
@@ -75,9 +77,9 @@ body {
 
 #next-tetro {
 	font-size: 0;
-	position: absolute;
+	/* position: absolute;
 	top: 200px;
-	left: 200px;
+	left: 200px; */
 }
 
 #game-over {
@@ -100,4 +102,22 @@ body {
 }
 #game-over p {
 	background-color: red;
+}
+
+/* #game-paused {
+	font-size: 100px;
+	text-align: center;
+	color: white;
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 3;
+	transform: translate(-50%, 200%);
+} */
+
+@font-face {
+	font-family: 'segments';
+	src: url(./fonts/7-segment.ttf);
+	font-weight: 100;
 }

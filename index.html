@@ -8,31 +8,28 @@
 </head>
 <body>
     <div id="game">
-        <button id="startPause">Старт</button>
-        <!-- <button id="pause">Пауза</button> -->
-        <div>Уровень: <span id="level">0</span></div>
-        <div>Счет: <span id="score">0</span></div>
-        <div class="heart-box">
-            <img id="live1" src="./heart.svg" alt="life1">
-            <img id="live2" src="./heart.svg" alt="life2">
-            <img id="live3" src="./heart.svg" alt="life3">
+        <div class="control-panel">
+            <button id="startPause">Start</button>
+            <div>Level: <span id="level">0</span></div>
+            <div>Score: <span id="score">0</span></div>
+            <div class="heart-box">
+                <img id="live1" src="./images/heart.svg" alt="life1">
+                <img id="live2" src="./images/heart.svg" alt="life2">
+                <img id="live3" src="./images/heart.svg" alt="life3">
+            </div>
+            <div id="next-tetro"></div>
+            <div>Time: <span id="display">00:00:00</span></div>
         </div>
-        <div>Время: <span id="display">00:00:00</span></div>
+        <div class="main"></div>
+        <div class="pause-cover">
+            <p>Pause</p>
+            <button id="restartBtn">Restart</button>
+        </div>
+        <div id="game-over">
+            <p>Game over</p>
+            <button id="restartBtn2">Restart</button>
+        </div>
         
-        <!-- 10 x 20 -->
-        <div class="playfield-container">
-            <div class="main"></div>
-            <div class="pause-cover">
-                <p>Пауза</p>
-                <button id="restartBtn">Перезапустить</button>
-            </div>
-            <div id="game-over">
-                <p>Игра окончена</p>
-                <p>Счёт: <span id="go-score">0</span></p>
-                <button id="restartBtn2">Перезапустить</button>
-            </div>
-        </div>
-        <div id="next-tetro"></div>
     </div>
     <script src="./script.js"></script>
 </body>
