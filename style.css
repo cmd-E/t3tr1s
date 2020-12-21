@@ -5,8 +5,9 @@
 body {
 	margin: 0;
 	background: rgb(154, 166, 128);
-	color: white;
-	font-family: Arial, Helvetica, sans-serif;
+	color: black;
+	/* font-family: Arial, Helvetica, sans-serif; */
+	font-family: segments;
 }
 .heart-box {
 	display: inline-block;
@@ -128,3 +129,9 @@ body {
 	z-index: 3;
 	transform: translate(-50%, 200%);
 } */
+
+@font-face {
+	font-family: 'segments';
+	src: url(./fonts/7-segment.ttf);
+	font-weight: 100;
+}
