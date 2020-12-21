@@ -16,19 +16,21 @@ body {
 }
 
 #game {
-	padding-top: 20px;
+	/* padding-top: 20px; */
 	font-size: 40px;
 	width: 320px;
 	margin: auto;
 }
 
 .pause-cover {
-	width: 320px;
-	height: 620px;
+	width: 307px;
+	height: 607px;
 	margin: 20px auto 0;
-	border: 10px solid silver;
+	border: 3px solid black;
 	font-size: 50px; /*Без него между ячеками образуется пространство*/
-	background-color: gray;
+	/* background-color: gray; */
+	background: rgb(154, 166, 128);
+
 	display: none;
 	text-align: center;
 	justify-content: center;
@@ -46,13 +48,11 @@ body {
 }
 
 .main {
-	/*+20 пикселей для рамки*/
 	width: 307px;
 	height: 607px;
 	margin: 20px auto 0;
 	border: 3px solid black;
 	font-size: 0; /*Без него между ячеками образуется пространство*/
-	/* background-color: black; */
 	background: rgb(154, 166, 128);
 	z-index: 0;
 	position: absolute;
@@ -67,28 +67,19 @@ body {
 	will-change: opacity;
 }
 
-.movingCell {
-	background-color: blue;
-}
-
-.fixedCell {
-	background-color: green;
-}
-
 #next-tetro {
 	font-size: 0;
-	/* position: absolute;
-	top: 200px;
-	left: 200px; */
+	height: 120px;
+	width: 120px;
 }
 
 #game-over {
-	width: 320px;
-	height: 620px;
+	width: 307px;
+	height: 607px;
 	margin: 20px auto 0;
-	border: 10px solid silver;
+	border: 3px solid black;
 	font-size: 40px; /*Без него между ячеками образуется пространство*/
-	background-color: grey;
+	background: rgb(154, 166, 128);
 	display: none;
 	text-align: center;
 	justify-content: center;
@@ -103,18 +94,6 @@ body {
 #game-over p {
 	background-color: red;
 }
-
-/* #game-paused {
-	font-size: 100px;
-	text-align: center;
-	color: white;
-	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	z-index: 3;
-	transform: translate(-50%, 200%);
-} */
 
 @font-face {
 	font-family: 'segments';
