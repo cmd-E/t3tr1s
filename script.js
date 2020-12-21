@@ -16,14 +16,12 @@ const rowPopAudio = new Audio('./sounds/row-pop.wav')
 const gameOverAudio = new Audio('./sounds/game-over.wav')
 let soundIsOn = true
 document.getElementById('sound-icon').addEventListener('click', (e) => {
-	console.log('clicked')
 	if (soundIsOn) {
 		e.target.src = './images/sound-off.svg'
 	} else {
 		e.target.src = './images/sound-on.svg'
 	}
 	soundIsOn = !soundIsOn
-	console.log(`soundIsOn: ${soundIsOn}`)
 })
 let rowRemoved = false
 let playField = [
