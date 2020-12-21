@@ -14,6 +14,17 @@ let livesImages = Array.from(document.querySelectorAll('img'))
 let pauseCover = document.querySelector('.pause-cover')
 const rowPopAudio = new Audio('./sounds/row-pop.wav')
 const gameOverAudio = new Audio('./sounds/game-over.wav')
+let soundIsOn = true
+document.getElementById('sound-icon').addEventListener('click', (e) => {
+	console.log('clicked')
+	if (soundIsOn) {
+		e.target.src = './images/sound-off.svg'
+	} else {
+		e.target.src = './images/sound-on.svg'
+	}
+	soundIsOn = !soundIsOn
+	console.log(`soundIsOn: ${soundIsOn}`)
+})
 let rowRemoved = false
 let playField = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -149,7 +160,7 @@ function drawCleanNtGrid() {
  * Draws playfield list to page. Opacity 1 means cell is displayed, 0 - not
  */
 function draw() {
-	if (rowRemoved) {
+	if (rowRemoved && soundIsOn) {
 		rowPopAudio.play()
 		rowRemoved = false
 	}
@@ -383,7 +394,7 @@ function reset(manualReset = false) {
 		gameTimerID = undefined
 		isPaused = true
 	} else {
-		gameOverAudio.play()
+		if (soundIsOn) gameOverAudio.play()
 		deaths++
 		if (deaths < maxDeathCount) {
 			requestAnimationFrame(removeLife)
