@@ -117,7 +117,7 @@ function drawNewPlayfield() {
 	let mainInnerHTML = ''
 	for (let y = 0; y < playField.length; y++) {
 		for (let x = 0; x < playField[y].length; x++) {
-			mainInnerHTML += '<div class="cell" style="opacity:0;"></div>'
+			mainInnerHTML += '<div class="cell" style="opacity:0.25;"></div>'
 		}
 	}
 	main.innerHTML = mainInnerHTML
@@ -133,7 +133,7 @@ function drawCleanNtGrid() {
 	let nextTetroInnerHTML = ''
 	for (let y = 0; y < 4; y++) {
 		for (let x = 0; x < 4; x++) {
-			nextTetroInnerHTML += '<div class="cell" style="opacity:0;"></div>'
+			nextTetroInnerHTML += '<div class="cell" style="opacity:0.25;"></div>'
 		}
 		nextTetroInnerHTML += '<br/>'
 	}
@@ -153,7 +153,7 @@ function draw() {
 			} else if (playField[y][x] === 2) {
 				mainCellArr[y][x].style.opacity = '1'
 			} else {
-				mainCellArr[y][x].style.opacity = '0'
+				mainCellArr[y][x].style.opacity = '0.25'
 			}
 		}
 	}
@@ -165,7 +165,7 @@ function draw() {
 function drawNextTetro() {
 	ntCellsArr.forEach((row) => {
 		row.forEach((cell) => {
-			cell.style.opacity = 0
+			cell.style.opacity = '0.25'
 		})
 	})
 	for (let y = 0; y < nextTetro.shape.length; y++) {
@@ -173,7 +173,7 @@ function drawNextTetro() {
 			if (nextTetro.shape[y][x] === 1) {
 				ntCellsArr[y][x].style.opacity = 1
 			} else {
-				ntCellsArr[y][x].style.opacity = 0
+				ntCellsArr[y][x].style.opacity = '0.25'
 			}
 		}
 	}
