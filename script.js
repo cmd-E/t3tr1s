@@ -12,6 +12,9 @@ const restartBtn2 = document.getElementById('restartBtn2') // button from gameov
 const gameOver = document.getElementById('game-over')
 let livesImages = Array.from(document.querySelectorAll('img'))
 let pauseCover = document.querySelector('.pause-cover')
+const rowPopAudio = new Audio('./sounds/row-pop.wav')
+const gameOverAudio = new Audio('./sounds/game-over.wav')
+let rowRemoved = false
 let playField = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -146,6 +149,10 @@ function drawCleanNtGrid() {
  * Draws playfield list to page. Opacity 1 means cell is displayed, 0 - not
  */
 function draw() {
+	if (rowRemoved) {
+		rowPopAudio.play()
+		rowRemoved = false
+	}
 	for (let y = 0; y < playField.length; y++) {
 		for (let x = 0; x < playField[y].length; x++) {
 			if (playField[y][x] === 1) {
@@ -247,6 +254,7 @@ function removeFullLines() {
 			playField.splice(y, 1)
 			playField.splice(0, 0, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 			filledLines += 1
+			rowRemoved = true
 		}
 		canRemoveLine = true
 	}
@@ -268,7 +276,6 @@ function removeFullLines() {
 			requestAnimationFrame(updateScore)
 			break
 	}
-
 	if (score >= possibleLevels[currentLevel].nextLevelScore) {
 		currentLevel++
 		requestAnimationFrame(updateLevel)
