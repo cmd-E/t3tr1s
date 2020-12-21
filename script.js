@@ -383,6 +383,7 @@ function reset(manualReset = false) {
 		gameTimerID = undefined
 		isPaused = true
 	} else {
+		gameOverAudio.play()
 		deaths++
 		if (deaths < maxDeathCount) {
 			requestAnimationFrame(removeLife)
