@@ -65,10 +65,6 @@ body {
 	flex-direction: row-reverse;
 }
 
-/* .playfield-container {
-	position: relative;
-} */
-
 .control-panel {
 	margin: auto;
 	width: 20%;
