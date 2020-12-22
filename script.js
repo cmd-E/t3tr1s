@@ -540,12 +540,16 @@ let timerInterval
 function updateTimeOnPage(txt) {
 	document.getElementById('display').innerHTML = txt
 }
-
+let callCount = 0
 function startStopwatch() {
 	startTime = Date.now() - elapsedTime
 	timerInterval = setInterval(function printTime() {
 		elapsedTime = Date.now() - startTime
-		updateTimeOnPage(timeToString(elapsedTime))
+		callCount++
+		if (callCount > 100) {
+			updateTimeOnPage(timeToString(elapsedTime))
+			callCount = 0
+		}
 	}, 10)
 }
 
