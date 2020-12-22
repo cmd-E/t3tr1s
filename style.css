@@ -53,9 +53,14 @@ body {
 	margin: 100px auto;
 }
 
+.manual {
+	margin: auto;
+	font-size: 20px;
+}
+
 .container {
 	margin: auto;
-	width: 40%;
+	width: 60%;
 	display: flex;
 	flex-direction: row-reverse;
 }
@@ -112,9 +117,6 @@ body {
 
 #game-over * {
 	margin: 100px auto;
-}
-#game-over p {
-	/* background-color: red; */
 }
 
 @font-face {
