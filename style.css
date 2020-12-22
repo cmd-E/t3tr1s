@@ -16,6 +16,7 @@ body {
 	height: 50px;
 }
 
+/*Нет елементов с id game, но если удалить эти стили, то вся разметка едет*/
 #game {
 	/* padding-top: 20px; */
 	height: 607px;
@@ -113,7 +114,7 @@ body {
 	margin: 100px auto;
 }
 #game-over p {
-	background-color: red;
+	/* background-color: red; */
 }
 
 @font-face {
