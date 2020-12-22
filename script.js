@@ -546,7 +546,7 @@ function startStopwatch() {
 	timerInterval = setInterval(function printTime() {
 		elapsedTime = Date.now() - startTime
 		callCount++
-		if (callCount > 100) {
+		if (callCount > 50) {
 			updateTimeOnPage(timeToString(elapsedTime))
 			callCount = 0
 		}
