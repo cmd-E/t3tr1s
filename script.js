@@ -405,7 +405,6 @@ function reset(manualReset = false) {
 		requestAnimationFrame(updateScore)
 		requestAnimationFrame(updateLevel)
 		requestAnimationFrame(removeLife)
-		debugger
 		clearInterval(gameTimerID)
 		gameTimerID = undefined
 		isPaused = true

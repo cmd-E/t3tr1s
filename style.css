@@ -8,6 +8,7 @@ body {
 	color: black;
 	/* font-family: Arial, Helvetica, sans-serif; */
 	font-family: segments;
+	font-size: 40px;
 }
 .heart-box {
 	display: inline-block;
@@ -17,9 +18,17 @@ body {
 
 #game {
 	/* padding-top: 20px; */
+	height: 607px;
+	width: 307px;
 	font-size: 40px;
-	width: 320px;
 	margin: auto;
+}
+
+.game-container {
+	width: 320px;
+	height: 620px;
+	margin: auto;
+	width: 50%;
 }
 
 .pause-cover {
@@ -43,8 +52,20 @@ body {
 	margin: 100px auto;
 }
 
-.playfield-container {
+.container {
+	margin: auto;
+	width: 40%;
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+/* .playfield-container {
 	position: relative;
+} */
+
+.control-panel {
+	margin: auto;
+	width: 20%;
 }
 
 .main {
