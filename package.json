@@ -1,0 +1,10 @@
+{
+  "name": "t3tr1s",
+  "private": true,
+  "version": "1.0.0",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "test": "node --test engine.test.cjs script.test.cjs engine.behavior.test.cjs script.behavior.test.cjs",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-include=engine.js --test-coverage-include=script.js --test-coverage-lines=99 --test-coverage-branches=98 --test-coverage-functions=100 --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=.artifacts/coverage.lcov engine.test.cjs script.test.cjs engine.behavior.test.cjs script.behavior.test.cjs"
+  }
+}
